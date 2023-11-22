@@ -1,0 +1,35 @@
+<!-- principal.component.html -->
+<div class="conversor-monedas">
+    <h2>Conversor de Monedas</h2>
+    <form #conversorForm="ngForm" (ngSubmit)="convertir()">
+        <div>
+            <label for="monto">Monto:</label>
+            <input type="number" id="monto" name="monto" [(ngModel)]="monto" required />
+        </div>
+        <div>
+            <label for="monedaActual">Moneda Actual:</label>
+            <select id="monedaActual" name="monedaActual" [(ngModel)]="monedaActual" required>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="PEN">PEN</option>
+            </select>
+        </div>
+        <div>
+            <label for="monedaDeseada">Moneda Deseada:</label>
+            <select id="monedaDeseada" name="monedaDeseada" [(ngModel)]="monedaDeseada" required>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="PEN">PEN</option>
+            </select>
+        </div>
+        <button type="submit" [disabled]="conversorForm.invalid">Convertir</button>
+    </form>
+    <div *ngIf="montoConTipoDeCambio !== undefined">
+        <h3>Resultados</h3>
+        <p>Monto original: {{ monto }} {{ monedaActual }}</p>
+        <p>Monto con tipo de cambio: {{ montoConTipoDeCambio | currency: monedaDeseada }}</p>
+        <p>Moneda de origen: {{ monedaOrigen }}</p>
+        <p>Moneda de destino: {{ monedaDestino }}</p>
+        <p>Tipo de cambio: {{ tipoDeCambio }}</p>
+    </div>
+</div>
